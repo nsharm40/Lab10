@@ -24,16 +24,29 @@ public class Sorting {
 
     /** Total data size. */
     private static final int TOTAL_INTEGER_VALUES = 1000000;
-
     /**
      * Bubble sort.
      *
      * @param array unsorted input array
      * @return the sorted array, or null on failure
      */
-    @SuppressWarnings("unused")
     private static int[] bubbleSort(final int[] array) {
-        return null;
+        int length = array.length;
+        boolean swap = true;
+        while (swap) {
+            swap = false;
+            for (int i = 0; i < length - 1; i++) {
+                for (int j = 0; j < length - i - 1; j++) {
+                    if (array[j] > array[j + 1]) {
+                        int temp = array[j + 1];
+                        array[j + 1] = array[j];
+                        array[j] = temp;
+                        swap = true;
+                    }
+                }
+            }
+        }
+        return array;
     }
 
     /**
@@ -44,7 +57,21 @@ public class Sorting {
      */
     @SuppressWarnings("unused")
     private static int[] selectionSort(final int[] array) {
-        return null;
+        for (int i = 0; i < array.length - 1; i++) {
+            int min = array[i];
+            int minIndex = i;
+            for (int j = i + 1; j < array.length; j++) {
+                if (min > array[j]) {
+                    min = array[j];
+                    minIndex = j;
+                }
+            }
+            if (minIndex != i) {
+                array[minIndex] = array[i];
+                array[i] = min;
+            }
+        }
+        return array;
     }
 
     /**
@@ -173,7 +200,7 @@ public class Sorting {
         int whichAlgorithm;
         do {
             System.out.println("Enter the sorting algorithm that you want to use"
-                    + " (1 for bubble sort, 2 for insertion sort, 3 for merge sort, 4 for built-in): ");
+                    + " (1 for bubble sort, 2 for selection sort, 3 for merge sort, 4 for built-in): ");
             whichAlgorithm = userInput.nextInt();
         } while (whichAlgorithm <= 0 || whichAlgorithm >= 5);
 
